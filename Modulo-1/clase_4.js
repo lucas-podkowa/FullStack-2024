@@ -74,7 +74,7 @@ function hola_b(nombre, apellido, edad) {
         return saludo;
 
     } catch (error) {
-        alert(error) //aca les mostraba como capturabamos el error
+        alert("intente nuevamente mas tarde que ahora no funciona") //aca les mostraba como capturabamos el error
     } finally {
         console.log("fin del try")
     }
@@ -187,7 +187,7 @@ var mate = {
         return respuesta;
     }
 
-    
+
 }
 //mate.presentacion()
 
@@ -195,37 +195,3 @@ var mate = {
 
 //alert (mate.tienes_el_color("plata"));
 
-//-------------------------------------------------------------------------------------------
-
-//Definicion de la clase ANIMAL
-class Animal {
-    //Definicion de sus propiedades
-    nombre;
-    color;
-    tipo;
-
-    //inicializacion
-    constructor(nombre, color, tipo) {
-        this.nombre = nombre;
-        this.color = color;
-        this.tipo = tipo;
-    }
-
-    //metodos
-    presentarme() {
-        console.log(`Hola, soy un: ${this.tipo}, me llaman: ${this.nombre} y soy de color: ${this.color}`);
-        //console.log("Hola, soy un: " + this.tipo + ", me llaman: " + this.nombre + "y soy de color: " + this.color);
-    }
-};
-
-
-//instanciacion de clase a objetos
-var animal1 = new Animal('Pelusa', 'Blanco');
-var animal2 = new Animal('Aaron', 'perro');
-
-
-//invocacion de metodos.
-animal1.presentarme();
-animal2.presentarme();
-
-console.log(animal1.color);
