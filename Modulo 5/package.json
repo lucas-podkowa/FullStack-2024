@@ -1,0 +1,11 @@
+{
+  "name": "modulo-5",
+  "version": "1.0.0",
+  "description": "clases acerca de express con nodeJS",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lucas Podkowa",
+  "license": "ISC"
+}
