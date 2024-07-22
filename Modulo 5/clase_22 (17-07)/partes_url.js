@@ -4,9 +4,9 @@ var q = url.parse(adr, true);
 
 console.log(q.protocol);
 console.log(q.hostname);
-console.log(q.port); 
+console.log(q.port);
 console.log(q.pathname);
 console.log(q.search);
-console.log(q.hash);  
+console.log(q.hash);
 var qdata = q.query;
 console.log(qdata.month)

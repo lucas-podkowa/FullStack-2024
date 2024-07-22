@@ -3,7 +3,7 @@ var app = express();
 
 
 app.get('/', function (peticion, respuesta) {
-    respuesta.send("Esto es el HOME o pagina principal" + "<button> perfiles</button>");
+    respuesta.send("Esto es el HOME o pagina principal " + "<button> perfiles</button>");
 });
 
 app.get('/perfiles', function (peticion, respuesta) {
