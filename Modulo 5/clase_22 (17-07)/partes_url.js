@@ -9,4 +9,4 @@ console.log(q.pathname);
 console.log(q.search);
 console.log(q.hash);
 var qdata = q.query;
-console.log(qdata.month)
+console.log(qdata.year)
