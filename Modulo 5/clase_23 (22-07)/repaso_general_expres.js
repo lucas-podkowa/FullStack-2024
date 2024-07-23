@@ -5,6 +5,23 @@ app.get('/api/:year', function (req, res) {
     res.send(JSON.stringify(req.query) + JSON.stringify(req.params))
 });
 
+/*
+app.get('/api/persona', function (req, res) {
+    res.send('listado de personas');
+});
+
+
+app.put('/api/persona/:este_falco', function (req, res) {
+    res.send('datos del flaco modificad');
+});
+
+app.post('/api/reserva', function (req, res) {
+    datos_de_la_reserva = req.body;
+    res.send("datos de la reserva creada");
+});
+
+*/
+
 app.listen(8080, () => {
     console.debug('App escuchando puerto :8080');
 });
@@ -57,27 +74,16 @@ app.post('/usaurios/registro', (req. res)=>{
 
 esto es una version simplificada, expandamosla un poquito
 
-essta funcio base_de_datos.save(user); estara en otro archivo donde debemos configurar la conexion de la base de datos y tener funciones que hagan diferentes cosas, como: 
+esta funcion "base_de_datos.save(user);"" estara en otro archivo donde debemos configurar la conexion a nuestra base de datos y tener funciones que hagan diferentes cosas, como: 
     -crear un usuario
-    -modificar un usuaio
-    -eliminar uin usuaio
+    -modificar un usuario
+    -eliminar un usuario
     -obtener datos del usuario
 
-    donde de ellas dispara una funcion llamada save que le paso por parametros algunos datos, es decir
+    una de ellas es nuestra funcion llamada "save" a la que le envío por parametros algunos datos, es decir
 
-    funcrion user_save(user){
+    function save(user){
         new query = "insert into usuarios (nombre, apellido, mail) values (user.name, user.apellido, user.email)"
-
-        if(si almaceno bien){
-        respuesta = nuevo usuario
-        }else{
-        mensaje de erro de la base de datos, por ejemplo (DNI repetido)
-        }
-
     }
-
-
- 
-
 
 */
