@@ -1,12 +1,9 @@
+//--- requires ------------------------------------------
 const express = require("express");
-const app = express();
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-var mysql = require("mysql");
-
-//nosotros somos uno agenos, debemos comunicarnos con el motor, asi como haciamos con workbench
+var app = express();
+const mysql = require("mysql");
+const morgan = require("morgan");
+//-------------------------------------------------------
 
 // Agregue las credenciales para acceder a su base de datos
 const connection = mysql.createConnection({
@@ -24,14 +21,19 @@ connection.connect((err) => {
   }
 });
 
-//middleware para controlar que el dato que recibo sea correcto
-// app.param("matricula", function (req, res, next, name) {
-//   if (!isNaN(matricula) && !isNaN(parseInt(matricula))) {
-//     next();
-//   } else {
-//     res.status(204).send("Matricula debe ser un número entero");
-//   }
-// });
+//----------middlewares (USE)--------------------------
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("tiny"));
+morgan(":method :url :status :res[content-length] - :response-time ms");
+//-------------------------------------------------------
+
+//---------- RUTAS (ENDPOINTS ---------------------------
+
+app.get("/", (req, res) => {
+  res.send("pagina de inicio funcionando perfectamente");
+});
 
 //listar medicos
 app.get("/api/medicos", (req, res) => {
@@ -152,6 +154,13 @@ app.delete("/api/medico/delete/:matricula", (req, res) => {
   });
 });
 
-app.listen(8080, () => {
-  console.debug("App escuchando puerto :8080");
+//-------------------------------------------------------
+
+app.listen(8080, (err) => {
+  if (err) {
+    console.log(err);
+    return;
+  } else {
+    console.log("Sevidor encendido y escuchando en el puerto 3000");
+  }
 });
