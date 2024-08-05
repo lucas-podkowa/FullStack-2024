@@ -17,20 +17,17 @@ connection.connect((err) => {
     }
 });
 
-const algo = "un Apellido"
-
 var metodos = {}
 
+// --> app.get("/", listarTodo());  --> medicos = medicoBD.getAll((err, result) => {}
 metodos.getAll = function (callback) {
-
     consulta = "select * from medico";
-
     connection.query(consulta, function (err, resultados, fields) {
         if (err) {
             callback(err);
             return;
         } else {
-            callback(udefined, {
+            callback(undefined, {
                 messaje: "Resultados de la consulta",
                 detail: resultados,
             });
@@ -38,10 +35,7 @@ metodos.getAll = function (callback) {
     });
 }
 
-
-
-
-
+// --> app.get('/:matricula', obtenerMedico);  -->  medicoBD.getMedico(matricula, () => {})
 metodos.getMedico = function (matricula, callback) {
     consulta = "select * from medico where matricula = ?";
 
@@ -57,17 +51,14 @@ metodos.getMedico = function (matricula, callback) {
                     detail: resultados,
                 });
             }
-
-            callback(resultados);
         }
 
     });
 
 }
 
+//--> medicoBD.metodos.crearMedico(req.body, (err, exito) => {});
 metodos.crearMedico = function (datosMedico, callback) {
-    
-    
     medico = [
         datosMedico.matricula,
         datosMedico.nombre,
@@ -75,12 +66,10 @@ metodos.crearMedico = function (datosMedico, callback) {
         datosMedico.especialidad,
         datosMedico.observaciones,
     ];
-
     query =
         "INSERT INTO MEDICO (matricula, nombre, apellido, especialidad, observaciones) VALUES (?, ?, ?, ?, ?)";
-    
+
     connection.query(query, medico, (err, rows) => {
-            
         if (err) {
             callback(err);
         } else {
@@ -89,44 +78,22 @@ metodos.crearMedico = function (datosMedico, callback) {
                 detail: rows,
             })
         }
-
-        });
+    });
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// -->  app.delete("/:matricula", eliminarMedico);   -->   medicoBD.metodos.deleteMedico(req.params.matricula, (err, exito) => {}); 
 metodos.deleteMedico = function (matricula, callback) {
     query = "delete from medico where matricula = ?";
     connection.query(query, matricula, function (err, rows, fields) {
         if (err) {
-            callback.json({
+            callback({
                 message: "ha ocurrido un error",
                 detail: err,
             });
-            return;
         }
 
         if (rows.affectedRows == 0) {
-            callback(udefined, "No se encontro un medico con la matricula " + matricula);
+            callback(undefined, "No se encontro un medico con la matricula " + matricula);
         } else {
             callback(undefined, "el medico " + matricula + " fue eliminado de la Base de datos");
         }

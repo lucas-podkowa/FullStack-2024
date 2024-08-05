@@ -1,59 +1,29 @@
 //--- requires ------------------------------------------
-const express = require("express");
-var app = express();
-const morgan = require("morgan");
-const medicoBD = require("./modelos/medicosModel");
+const express = require('express');
+const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(morgan("tiny"));
-morgan(":method :url :status :res[content-length] - :response-time ms");
 
 
+const medicoBD = require("./../modelos/medicosModel.js");
 
-//-------------------------------------------------------
+// -------------------------------------------------------- 
+// --rutas de escucha (endpoint) dispoibles para MEDICO --- 
+// --------------------------------------------------------
 
-
-app.get("/", (req, res) => {
-    res.send("pagina de inicio de medicos");
-});
-
-
-app.post("/create", crear());
-app.get("/medicos", listarTodo());
-app.get("/:matricula", obtenerMedico());
-app.delete("/delete/:matricula", eliminarMedico() );
+app.get("/", listarTodo);
+app.post('/create', crear);
+app.get('/:matricula', obtenerMedico);
+app.delete("/:matricula", eliminarMedico);
 
 
 
 
+// --------------------------------------------------------
+// ---------FUNCIONES UTILIZADAS EN ENDPOINTS -------------
+// --------------------------------------------------------
 
-
-
-
-
-
-
-
-//-------------------------------------------------------
-
-crear = function (req, res) {
-
-    medicoBD.metodos.crearMedico(req.body, (err, exito) => {
-        if (err) {
-            res.json({
-                message: "ha ocurrido un error",
-                detail: err,
-            });
-            return;
-        }
-        res.json(exito);
-    });
-
-}
-
-
-
-listarTodo = (req, res) => {
+function listarTodo(req, res) {
     medicos = medicoBD.metodos.getAll((err, result) => {
         if (err) {
             res.send(err);
@@ -64,20 +34,23 @@ listarTodo = (req, res) => {
     );
 }
 
-
-eliminarMedico = (req, res) => {
-    medicoBD.deleteMedico(req.params.matricula, (err, exito) => {
+function crear(req, res) {
+    medicoBD.metodos.crearMedico(req.body, (err, exito) => {
         if (err) {
-            res.status(500).json(err);
-        } else {
-            res.send(exito)
+            res.json({
+                message: "ha ocurrido un error",
+                detail: err,
+            });
+            return;
         }
-    })
+        res.json(exito);
+    });
 }
 
-obtenerMedico = (req, res) => {
-    matricula = req.params.matricula;
-    medicoBD.metodos.getMedico(matricula, () => {
+
+function obtenerMedico(req, res) {
+    let matricula = req.params.matricula;
+    medicoBD.getMedico(matricula, () => {
         (err, exito) => {
             if (err) {
                 res.status(500).send(err)
@@ -86,23 +59,18 @@ obtenerMedico = (req, res) => {
             }
         }
     });
-
 }
 
 
+function eliminarMedico(req, res) {
+    medicoBD.metodos.deleteMedico(req.params.matricula, (err, exito) => {
+        if (err) {
+            res.status(500).json(err);
+        } else {
+            res.send(exito)
+        }
+    })
+}
 
-
-
-//-------------------------------------------------------
-
-
-app.listen(8080, (err) => {
-    if (err) {
-        console.log(err);
-        return;
-    } else {
-        console.log("Sevidor encendido y escuchando en el puerto 3000");
-    }
-});
-
+//exportamos app que es nuestro servidor express a la cual se le agregaron endpoinds de escucha
 module.exports = app;
