@@ -1,5 +1,6 @@
 //--- requires ------------------------------------------
 const express = require('express');
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -12,9 +13,16 @@ const medicoBD = require("./../modelos/medicosModel.js");
 // --------------------------------------------------------
 
 app.get("/", listarTodo);
+app.get("/:especialidad", getByEspecialidad);
 app.post('/create', crear);
 app.get('/:matricula', obtenerMedico);
 app.delete("/:matricula", eliminarMedico);
+app.put("/:matricula", modificarMedico);
+
+
+
+
+
 
 
 
@@ -22,6 +30,18 @@ app.delete("/:matricula", eliminarMedico);
 // --------------------------------------------------------
 // ---------FUNCIONES UTILIZADAS EN ENDPOINTS -------------
 // --------------------------------------------------------
+
+function getByEspecialidad(req, res) {
+    especialidad = req.params.especialidad
+    medicos = medicoBD.metodos.getByEspecialidad(especialidad, (err, result) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(result);
+        }
+    }
+    );
+}
 
 function listarTodo(req, res) {
     medicos = medicoBD.metodos.getAll((err, result) => {
@@ -37,26 +57,39 @@ function listarTodo(req, res) {
 function crear(req, res) {
     medicoBD.metodos.crearMedico(req.body, (err, exito) => {
         if (err) {
-            res.json({
-                message: "ha ocurrido un error",
-                detail: err,
-            });
-            return;
+            res.send(err);
+        } else {
+            res.json(exito);
         }
-        res.json(exito);
     });
 }
 
 
 function obtenerMedico(req, res) {
     let matricula = req.params.matricula;
-    medicoBD.getMedico(matricula, () => {
+    medicoBD.metodos.getMedico(matricula, () => {
         (err, exito) => {
             if (err) {
                 res.status(500).send(err)
             } else {
                 res.status(200).send(exito)
             }
+        }
+    });
+}
+
+//app.put("/:matricula", modificarMedico);
+
+
+
+function modificarMedico(req, res) {
+    datosMedico = req.body;
+    deEsteMedico = req.params.matricula;
+    medicoBD.metodos.update(datosMedico, deEsteMedico, (err, exito) => {
+        if (err) {
+            res.status(500).send(err)
+        } else {
+            res.status(200).send(exito) //medico modificado
         }
     });
 }
