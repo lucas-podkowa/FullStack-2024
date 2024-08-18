@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablas</title>
+</head>
+
+<body>
+    <h1 id="tituloDeArriba">Tablas:</h1>
+    <table style="width:100%; border: 1px solid black;">
+        <caption>Mi tabla de Personas</caption>
+        <tr style="background-color: grey ;">
+            <th> DNI </th>
+            <th colspan="2">NOMBRE y PELLIDO</th>
+        </tr>
+        <tr>
+            <td>34004371</td>
+            <td>Lucas</td>
+            <td>Podkowa</td>
+        </tr>
+        <tr>
+            <td>14158106</td>
+            <td>Pedro</td>
+            <td>Pascal</td>
+        </tr>
+        <tr>
+            <td>226655887</td>
+            <td>Alguien</td>
+            <td>Su apellido</td>
+        </tr>
+        <tr></tr>
+    </table>
+
+
+    <script>
+        setTimeout(() => {
+            document.getElementById("tituloDeArriba").innerHTML = "titulo cambiado";
+        }, 5000);
+
+        function molestar() {
+            alert("que onda wey");
+        }
+    </script>
+
+
+    <h1 id="demo" onmouseover="molestar()">Marco integrado (iframe)</h1>
+
+    <hr>
+
+
+    <h1 id="list">Listas ordenadas y no ordenadas</h1>
+
+    <!-- 
+    ol: oder list
+    ul: unorder list 
+    li: list item 
+    -->
+
+    <ol type="a" start="4">
+        <li>Personas
+            <ul style="list-style-type: none;">
+                <li> <a href="personas.html" target="_blank">
+                        RRHH
+                    </a>
+                </li>
+                <li>Autoridades</li>
+                <li>
+                    <img src="https://icones.pro/wp-content/uploads/2021/05/icone-html-noir.png"
+                        alt="perro blanco sentado" width="5" height="5">
+                    Alumnos
+                </li>
+            </ul>
+        </li>
+        <li><a href="https://www.google.com/">
+                Ir a Google
+            </a></li>
+        <li>Seguridad
+            <ul>
+                <li>Gestion de Usuarios</li>
+            </ul>
+        </li>
+    </ol>
+
+
+    <!-- <script>
+        document.getElementById("demo").innerHTML = "Hello JavaScript!";
+        
+        function molestar(){
+            alert("que pasa wey");
+        }
+    </script> -->
+
+</body>
+
+</html>

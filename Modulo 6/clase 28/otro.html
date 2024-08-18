@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <style type="text/css">
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 15px;
+            color: brown;
+        }
+    </style>
+
+    <h1>tablas</h1>
+
+    <!-- <table>
+        <tr>
+            <th colspan="2">Nombre y Apellido</th>
+            <th>fehca nacimiento</th>
+            <th>Nacionalidad</th>
+        </tr>
+        <tr>
+            <td> fila 1 celda 1</td>
+            <td> fila 1 celda 2</td>
+            <td> fila 1 celda 3</td>
+            <td rowspan="3"> fila 1 celda 4</td>
+        </tr>
+        <tr>
+            <td> fila 2 celda 1</td>
+            <td> fila 2 celda 2</td>
+            <td> fila 2 celda 3</td>
+        </tr>
+        <tr>
+            <td> fila 3 celda 1</td>
+            <td> fila 3 celda 2</td>
+            <td> fila 3 celda 3</td>
+        </tr>
+
+        <tr>
+
+        </tr>
+        <tr>
+
+        </tr>
+    </table> -->
+
+
+    <table style="width:80%">
+        <tr>
+            <th>Nombre Medico</th>
+            <th>especialidad</th>
+        </tr>
+
+        foreach(medico of medicos){
+        <tr>
+            <td>medico.nombre</td>
+            <td>medico.especialidad</td>
+        </tr>
+
+        }
+
+    </table>
+
+</body>
+
+</html>

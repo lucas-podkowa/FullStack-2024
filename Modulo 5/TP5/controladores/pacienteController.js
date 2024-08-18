@@ -6,7 +6,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-const medicoBD = require("./../modelos/medicosModel.js");
+const medicoBD = require("../modelos/medicosModel.js");
 
 // -------------------------------------------------------- 
 // --rutas de escucha (endpoint) dispoibles para MEDICO --- 
