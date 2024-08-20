@@ -14,8 +14,8 @@ const configuracion = require("./config.json");
 //cuando llega una peticion desde el cliente, debo redireccionar el pedido a su correspondiente controlador
 //en la URL tengo la informacion hacia donde enviar
 
-const medicoController = require("./controladores/medicoController.js");
-app.use("/api/medico", medicoController);
+
+app.use("/api/medico", require("./controladores/medicoController.js"));
 
 
 //const pacienteController = require("./controladores/pacienteController.js");

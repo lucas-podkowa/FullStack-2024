@@ -1,0 +1,19 @@
+h1 {
+    color: rgba(39, 148, 54, 0.906);
+
+}
+
+h3 {
+    background-color: aquamarine;
+}
+
+p {
+    color: rgb(255, 0, 76);
+    background-color: burlywood;
+
+}
+
+span {
+    color: rgb(233, 21, 176);
+    background-color: burlywood;
+}

@@ -1,0 +1,27 @@
+.claro_con_borde {
+    background-color: lightgreen;
+    color: brown;
+    border: 1px solid salmon;
+}
+
+.oscuro {
+    background-color: black;
+    color: cornflowerblue;
+}
+
+p {
+    color: blue;
+}
+
+p.claro_con_borde {
+    color: red;
+}
+
+div p.oscuro {
+    background-color: coral;
+}
+
+span p {
+    background-color: aquamarine;
+}
+
