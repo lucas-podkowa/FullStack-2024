@@ -1,6 +1,6 @@
 # Programación Web Full Stack
 El presente repositorio es simplemente una bitácora que servirá de apoyo al curso on-line cuya propuesta pedagógica tiene el propósito lograr que los estudiantes incorporen los conceptos y herramientas indispensables para las bases de programación y del desarrollo de aplicaciones web.
-* Contenido del curso
+* [Contenido del curso](/Planificación.pdf/)
 * [Videos de las clases On-line](https://www.youtube.com/playlist?list=PL5C4vQwZOcVcsrnAGDGZAtyhu9fO7_774) 
 
 ## Módulo 1: Nivelación y fundamentos de la Programación
