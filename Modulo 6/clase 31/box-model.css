@@ -1,0 +1,36 @@
+span {
+
+    /* estilos de la fuente*/
+    color: chocolate;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: underline;
+    font-weight: 600;
+
+
+    /* caja con una separacion de 10 px arriba-abajo y 30px izq-der */
+    border: 1px solid black;
+    padding: 10px 30px;
+
+    /* color de fondo de la caja y sobra blanca alrededor*/
+    background-color: rgb(169, 169, 169);
+    box-shadow: 0px 2px 20px 5px white;
+}
+
+div {
+    background-color: rgb(147, 155, 155);
+    height: 200px;
+    width: 200px;
+    align-content: center;
+    text-align: center;
+
+    border-style: double;
+    border-color: white;
+    border-width: 5px;
+
+    /*margen de 1rem = 16px a todos los costados*/
+    margin: 1rem;
+
+    /*separacion desde el borde interior blanco hasta el borde exterior negro*/
+    padding-left: 2rem;
+    padding-right: 2rem;
+}

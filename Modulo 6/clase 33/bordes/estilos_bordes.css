@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+}
+
+section {
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    background-color: #888;
+}
+
+body div {
+    background-color: white;
+    width: 500px;
+    height: 100px;
+}
+
+.expandida {
+    /* margen */
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+    /* padding */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    /*border*/
+    border-top-color: chocolate;
+    border-top-style: solid;
+    border-top-width: 5px;
+    border-bottom-color: blue;
+    border-bottom-style: double;
+    border-bottom-width: 8px;
+}
+
+.abreviada {
+    margin: 1rem;
+    padding: 10px 20px;
+    border-top: 5px solid chocolate;
+    border-bottom: 8px double blue;
+}
+
+
+
+/*box-sizing && border-radius*/
+.bordeExp {
+    margin: 10px;
+    border-color: whitesmoke;
+    border-style: double;
+    border-width: 10px;
+
+    border-top-left-radius: 5px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 15px;
+
+    box-sizing: content-box;
+}
+
+
+.bordeShort {
+    margin: 10px;
+    border: 10px double whitesmoke;
+    border-radius: 5px 15px 15px 5px;
+    box-sizing: border-box;
+}
+
+.dark {
+    color: white;
+    background-color: #444;
+    transition: border-radius 1s ease-in-out;
+}
+
+.dark:hover {
+    border-radius: 30px 0px;
+}
+
+/* Horizontal | Vertical | Shadow Length | Radius Blur | Color*/

@@ -1,0 +1,15 @@
+p {
+    color: #3eea0e;
+    font-style: italic;
+    text-shadow: 1px 1px 2px rgb(75, 28, 218);
+}
+
+p:hover{
+    text-shadow: 0px 0px 2px rgb(255,0,0);
+}
+
+div {
+    background-color: #999;
+    border-style: double;
+    border-width: 10px;
+}
