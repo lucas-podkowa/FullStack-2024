@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1 id="miElemento">Texto original</h1>
+    <button onclick="cambiarEstilo()">Cambiar Estilo</button>
+
+    <script>
+        function cambiarEstilo() {
+            const elemento = document.getElementById('miElemento');
+            elemento.style.backgroundColor = 'lightgreen'; // Cambia el color de fondo
+            elemento.style.border = '4px double black';      // Cambia el borde
+        }
+    </script>
+
+
+    <h2>JavaScript HTML Eventos</h2>
+    Enter your name: <input type="text" id="fname" onchange="upperCase()">
+    <p>Cuando dejas el campo de texto, se dispara la función para cambiar el texto a mayúsculas</p>
+
+    <script>
+        function upperCase() {
+            const x = document.getElementById("fname");
+            x.value = x.value.toUpperCase();
+        }
+    </script>
+
+</body>
+
+</html>

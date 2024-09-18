@@ -66,3 +66,13 @@ footer a {
 footer a:hover {
     color: #eb3f7b;
 }
+
+.divsito {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    border-radius: 50%;
+    position: sticky;
+    top: 10px;
+
+}
