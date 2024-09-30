@@ -1,0 +1,52 @@
+/*
+--------------------------------------------------------------
+--------------    Main and App     --------------------------
+--------------------------------------------------------------
+*/
+
+
+
+
+
+/*
+--------------------------------------------------------------
+--------------    NotFound Page     --------------------------
+--------------------------------------------------------------
+*/
+
+.not-found-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.not-found-container h1 {
+    font-size: 3rem;
+    color: #ff6b6b;
+}
+
+
+.not-found-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.back-home a {
+    text-decoration: none;
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+}
+
+.back-home a:hover {
+    background-color: #3d7e98;
+}
+
+/*
+--------------------------------------------------------------
+*/

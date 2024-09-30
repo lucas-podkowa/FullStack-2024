@@ -42,8 +42,7 @@ label {
 
 #div_btn {
     margin-top: 20px;
-    width: 50%;
-    margin: auto;
+    text-align: center;
 }
 
 #btn {
@@ -51,6 +50,7 @@ label {
     padding: 5px 0px;
     color: white;
     border-radius: 5px;
+    width: 50%;
 }
 
 #btn:hover {
