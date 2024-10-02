@@ -49,4 +49,61 @@
 
 /*
 --------------------------------------------------------------
+--------------    Login     ----------------------------------
+--------------------------------------------------------------
 */
+
+.section_login {
+    width: 100vh;
+    margin: auto;
+}
+
+.titulo_login {
+    color: #6050ff;
+    margin: 10px 0
+}
+
+.container_login {
+    background-color: #eceefb;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.input_login {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border-style: none;
+    border-radius: 2px;
+    box-shadow: 0px 2px 10px 2px #ccc;
+    outline: none;
+}
+
+.input_login:focus {
+    box-shadow: 0px 0px 10px 1px #d2ceff;
+
+}
+
+.label_login {
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+
+.div_btn {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn_login {
+    background-color: #6050ff;
+    padding: 5px 0px;
+    color: white;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.btn_login:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 10px 1px #544f96;
+}

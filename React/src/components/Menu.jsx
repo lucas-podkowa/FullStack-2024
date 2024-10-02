@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 
 export default function Menu() {
-    let isLogin = true;
+    //let isLogin = true;
 
     // if (isLogin) {
     return (<>
@@ -33,16 +33,12 @@ export default function Menu() {
                         <li className="nav-item">
                             <Link
                                 className="nav-link"
-                                to="reservas">
+                                to="/reservas">
                                 Reservas
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link
-                                className="nav-link"
-                                to="#">
-                                Eventos
-                            </Link>
+                            <Link className="nav-link" to="/blog"> Blog </Link>
                         </li>
                         <li className="nav-item dropdown">
                             <Link
@@ -51,12 +47,11 @@ export default function Menu() {
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                                 to="#">
-                                Empleados
+                                Otros
                             </Link>
                             <ul className="dropdown-menu">
-                                <li><Link className="dropdown-item" to="#">Docentes</Link></li>
-                                <li><Link className="dropdown-item" to="#">No Docentes</Link></li>
-                                <li><Link className="dropdown-item" to="#">Directivos</Link></li>
+                                <li><Link className="dropdown-item" to="/clinica">Clinica</Link></li>
+                                <li><Link className="dropdown-item" to="/blog">Blog</Link></li>
                             </ul>
                         </li>
                     </ul>
