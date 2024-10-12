@@ -4,10 +4,10 @@ import Vehiculos from "./pages/Vehiculos";
 import Login from "./pages/Login";
 import Menu from "./components/Menu";
 import NotFound from "./components/NotFound";
-import Blog from "./blog/Blog";
 import Componente from "./components/Componente";
 import HomeDoctores from "./pages/clinica/HomeDoctores";
 import Reservas from "./pages/Reservas";
+import Blog from "./pages/blog/Blog";
 
 
 function App() {

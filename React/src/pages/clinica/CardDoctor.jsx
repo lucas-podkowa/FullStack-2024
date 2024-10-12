@@ -3,7 +3,7 @@ export function CardDoctor({ nombre, especialidad, urlImagen }) {
 
     return (
 
-        <div class="card">
+        <div className="card">
             <img src={urlImagen} />
             <h3>{nombre}</h3>
             <p>Especialidad: {especialidad}</p>
