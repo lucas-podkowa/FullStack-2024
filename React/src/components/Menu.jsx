@@ -1,23 +1,32 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useState } from 'react';
+
+
+import { useEffect, useState } from 'react';
 
 
 export default function Menu() {
-    let navegar = useNavigate();
+    const navigate = useNavigate();
 
-    let [isLogin, setLogin] = useState(false);
+    //let [isLogin, setLogin] = useState(false);
+    const [token, setToken] = useState("");
 
-    function entrar() {
-        setLogin(true);
-        navegar('/login');
+    useEffect(() => {
+        const t = sessionStorage.getItem('token')
+        if (t !== token) {
+            setToken(t)
+            //significa actualizar mi estado interno para tener el ultimo token valido siempre
+        }
+    });
+
+
+    function logout() {
+        sessionStorage.removeItem('token');
+        setToken("");
+        navigate('/');
     }
-    function salir() {
-        setLogin(false);
-        navegar('/');
-    }
 
-    if (isLogin) {
-
+    if (token !== "" && token !== null) {
+        //var decoded = jwt_decode(token);
         return (<>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
@@ -69,7 +78,7 @@ export default function Menu() {
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
                             <button
-                                onClick={salir}
+                                onClick={() => logout()}
                                 className='btn btn-outline-danger btn-sm'>
                                 <span
                                     className="material-symbols-outlined">
@@ -90,16 +99,13 @@ export default function Menu() {
                         <div className="collapse navbar-collapse" id="navbarNav">
                             <ul className="navbar-nav ms-auto">
                                 <li className="nav-item">
-                                    <button
-                                        onClick={entrar}
-                                        className='btn btn-primary btn-sm'>
-                                        Iniciar Sesión
-                                    </button>
+                                    <Link to="/login" className='nav-link'>
+                                        Login</Link>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                </nav>
+                </nav >
             </>
         );
     }

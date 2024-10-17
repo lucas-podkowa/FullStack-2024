@@ -9,6 +9,9 @@ import HomeDoctores from "./pages/clinica/HomeDoctores";
 import Reservas from "./pages/Reservas";
 import Blog from "./pages/blog/Blog";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
     return (
@@ -16,7 +19,7 @@ function App() {
             <BrowserRouter>
                 <div className="container">
                     <Menu />
-
+                    <ToastContainer />
                     <Routes>
                         {/* Landing Page */}
                         <Route path="/" element={<Home />} />
