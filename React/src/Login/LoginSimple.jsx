@@ -4,20 +4,50 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-export default function Login() {
+export default function LoginSimple() {
 
     //onSubmit --> atrapa los datos del formulario
     //onChange --> attrapa los datos del elemento donde lo tengo declarado
     //e --> objeto que nos devuelve el evento onChange
     //e.target.value --> valor del elemento que esta disparando el evento
 
+    const confToast = {
+        position: 'bottom-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+    }
+
     const navigate = useNavigate();
 
     const [mail, setMail] = useState('');
     const [pass, setPass] = useState('');
 
+    const isValidEmail = (email) => {
+        return /\S+@\S+\.\S+/.test(email);
+    }
+
+    const isValidPassword = (password) => {
+        return password.length >= 8 && /\d/.test(password) && /[a-z]/.test(password) && /[A-Z]/.test(password);
+    };
+
     const submitHandler = async (e) => {
         e.preventDefault();
+
+
+        if (!isValidEmail(mail)) {
+            toast.error('Por favor, ingresa un correo electrónico válido.', confToast);
+            return;
+        }
+
+        if (!isValidPassword(pass)) {
+            toast.error('La contraseña debe tener al menos 8 caracteres, al menos 1 dígito y al menos una mayúscula', confToast);
+            return;
+        }
 
         const usuario = {
             mail: mail,
@@ -41,40 +71,13 @@ export default function Login() {
 
             if (res.ok) {
                 sessionStorage.setItem('token', body.token);
-                toast.success(`Bienvenido ${body.datos.nombre}`, {
-                    position: 'bottom-center',
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: 'light',
-                });
+                toast.success(`Bienvenido ${body.datos.nombre}`, confToast);
                 navigate("/vehiculos");
             } else {
-                toast.error(body.message, {
-                    position: 'bottom-center',
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: 'light',
-                });
+                toast.error(body.message, confToast);
             }
         } catch (error) {
-            toast.error(error.message, {
-                position: 'bottom-center',
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: 'light',
-            });
+            toast.error(error.message, confToast);
 
         }
 
@@ -92,7 +95,7 @@ export default function Login() {
                     <input
                         onChange={(e) => setMail(e.target.value)}
                         className='input_login'
-                        type="text" />
+                        type="mail" />
                 </div>
                 <div>
                     <label

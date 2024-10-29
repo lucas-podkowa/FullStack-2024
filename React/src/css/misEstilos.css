@@ -3,7 +3,21 @@
 --------------    Main and App     --------------------------
 --------------------------------------------------------------
 */
+.landingMain {
+    height: 100vh;
+    background-image: url("automotores.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-align: center;
+}
 
+.landingMain h1 {
+    position: relative;
+    top: 90%;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
 
 
 

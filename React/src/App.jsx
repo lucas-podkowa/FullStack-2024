@@ -11,11 +11,18 @@ import Blog from "./pages/blog/Blog";
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import VehiculoEdit from "./pages/VehiculoEdit";
+import VehiculosCard from "./pages/Vehiculos_card";
+import Reservas2 from "./pages/Reservas2";
+import LoginSimple from "./Login/LoginSimple";
+import LoginHooks from "./Login/LoginHooks";
+import LoginForm from "./Login/LoginForm";
 
 
 function App() {
     return (
         <>
+
             <BrowserRouter>
                 <div className="container">
                     <Menu />
@@ -25,11 +32,15 @@ function App() {
                         <Route path="/" element={<Home />} />
 
                         {/* Login */}
-                        <Route path="/login" element={<Login />}></Route>
+                        <Route path="/login" element={<LoginForm />}></Route>
 
                         {/* Rutas del MENU */}
-                        <Route path="/vehiculos" element={<Vehiculos />} />
-                        <Route path="/reservas" element={<Reservas />} />
+                        <Route path="/vehiculos" element={<VehiculosCard />} />
+                        <Route path="/vehiculo/crear/" element={<VehiculoEdit />} />
+                        <Route path="/vehiculo/edit/:matricula" element={<VehiculoEdit />} />
+
+
+                        <Route path="/reservas" element={<Reservas2 />} />
                         <Route path="/blog" element={<Blog />} />
                         <Route path="/clinica" element={<HomeDoctores />} />
 
@@ -39,6 +50,9 @@ function App() {
                     </Routes>
                 </div>
             </BrowserRouter>
+
+
+
         </>
     );
 }
