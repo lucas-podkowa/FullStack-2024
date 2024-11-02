@@ -2,24 +2,63 @@ import { useNavigate, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import { Button, Modal } from 'react-bootstrap';
 
 
 export default function VehiculoEdit() {
+
+
     const navigate = useNavigate();
+    const configToast = {
+        position: 'bottom-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+    }
+
+    // parametro que recibe cuando el componente Vehiculos_card preciona el boton editar activando el link
+    // to={`/vehiculo/edit/${vehiculo.matricula}`}
     const { matricula } = useParams();
 
-    const [marcas, setMarcas] = useState([]);
 
+    // hooks dedicados a cargar las marcas y a setear los datos del vehiculo al cargarse
+    //----------------------------------------------------------------
+    const [marcas, setMarcas] = useState([]);
     const [vehiculo, setVehiculo] = useState(
         {
-            marca_id: null,
+            marca_id: '',
             matricula: '',
             modelo: '',
             nombre: '',
-            kilometraje: null,
+            kilometraje: '',
         }
     )
     //----------------------------------------------------------------
+
+
+
+    // hooks dedicados a abrir el modal de eliminacion y setear el ID a eliminar
+    //----------------------------------------------------------------
+    const [modal, setModal] = useState(false);
+    const [matriculaToDelete, setMatriculaToDelete] = useState(null);
+    const showModal = (matricula) => {
+        setModal(true);
+        setMatriculaToDelete(matricula);
+    };
+
+    const closeModal = () => {
+        setModal(false);
+        setMatriculaToDelete(null);
+    };
+    //----------------------------------------------------------------
+
+
+
+
     // useEffect para cargar las marcas al montar el componente
     //----------------------------------------------------------------
     useEffect(() => {
@@ -52,8 +91,10 @@ export default function VehiculoEdit() {
         fetchMarcas();
     }, []);
 
-
     //----------------------------------------------------------------
+
+
+
     // useEffect para cargar los datos del vehículo si hay una matrícula
     //----------------------------------------------------------------
     useEffect(() => {
@@ -79,16 +120,7 @@ export default function VehiculoEdit() {
                             kilometraje: result.detail.kilometraje,
                         });
                     } else {
-                        toast.error(result.message, {
-                            position: 'bottom-center',
-                            autoClose: 5000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: 'light',
-                        });
+                        toast.error(result.message, configToast);
                     }
                 } catch (error) {
                     console.error(error);
@@ -98,8 +130,9 @@ export default function VehiculoEdit() {
             fetchVehiculo();
         }
     }, [matricula]);
-
     //----------------------------------------------------------------
+
+
     // funcion disparada al presionar el boton guardar del formulario
     //----------------------------------------------------------------
     const handleSubmit = async (event) => {
@@ -118,50 +151,58 @@ export default function VehiculoEdit() {
                 'authorization': sessionStorage.getItem('token')
             },
         }
-
         try {
             const response = await fetch(url, parametros);
             const result = await response.json();
             if (response.ok) {
-                toast.success(result.message, {
-                    position: 'bottom-center',
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: 'light',
-                });
+                toast.success(result.message, configToast);
                 navigate('/vehiculos');
             } else {
-                toast.error(result.message, {
-                    position: 'bottom-center',
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: 'light',
-                });
+                toast.error(result.message, configToast);
             }
         } catch (error) {
-            toast.error(error, {
-                position: 'bottom-center',
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: 'light',
-            });
+            toast.error(error.message, configToast);
+        }
+    };
+    //----------------------------------------------------------------
+
+
+    // funcion disparada al presionar el boton eiminar 
+    //----------------------------------------------------------------
+    const handleClickDelete = async () => {
+        console.log(matriculaToDelete)
+        const parametros = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'authorization': sessionStorage.getItem('token')
+            },
+        };
+
+        const url = `http://localhost:8080/vehiculo/${matriculaToDelete}`;
+
+        try {
+            const response = await fetch(url, parametros);
+            const body = await response.json();
+
+            if (response.ok) {
+                toast.success(body.message, configToast);
+                closeModal();
+                navigate('/vehiculos'); // Redirige después de eliminar
+            }
+        } catch (error) {
+            console.error(error);
         }
     };
 
-    const handleChange = (event) => {
+    //----------------------------------------------------------------
 
+
+    // funcion que queda escuchando los campos en el formulario para setear
+    // en la variable de estado vehiculo
+    //----------------------------------------------------------------
+    const handleChange = (event) => {
         setVehiculo({
             ...vehiculo,
             [event.target.name]: event.target.value,
@@ -244,11 +285,46 @@ export default function VehiculoEdit() {
                                 <label htmlFor="kilometraje">Kilometros</label>
                             </div>
                             <br />
-                            <input className="btn btn-primary" type="submit" value="Guardar" />
+                            <div className='row'>
+                                <div className='col d-flex justify-content-end gap-4'>
+                                    <span className="btn btn-primary" type="submit"
+                                        onClick={handleSubmit}>
+
+                                        Guardar
+                                    </span>
+                                    <span className="btn btn-secondary"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            navigate('/vehiculos');
+                                        }}>
+                                        Cancelar
+                                    </span>
+                                    <span className='btn btn-danger ' onClick={() => showModal(vehiculo.matricula)}>
+                                        <span className="material-symbols-outlined">
+                                            Eliminar
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
+
+            <Modal show={modal} onHide={closeModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirmación de Eliminación</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>¿Está seguro de eliminar el vehículo seleccionado?</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={closeModal}>
+                        Cancelar
+                    </Button>
+                    <Button variant="primary" onClick={handleClickDelete}>
+                        Confirmar Eliminación
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 }

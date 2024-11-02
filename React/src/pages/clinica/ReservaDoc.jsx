@@ -4,8 +4,8 @@ export default function ReservaDoc() {
     return (
         <>
             <div id="formulario-modal" class="modal">
-                <div class="modal-content">
-                    <span class="close" onclick="cerrarFormulario()">&times;</span>
+                <div className="modal-content">
+                    <span className="close" onclick="cerrarFormulario()">&times;</span>
                     <h2>Reservar Turno</h2>
                     <form id="reserva-form">
                         <p id="info-medico"></p>

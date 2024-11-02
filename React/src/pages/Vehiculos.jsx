@@ -22,7 +22,6 @@ export default function Vehiculos() {
 
     useEffect(() => {
 
-
         async function obtenerDatos() {
             try {
                 const parametros = {
@@ -60,7 +59,7 @@ export default function Vehiculos() {
                 <td>{vehiculo.modelo}</td>
                 <td>
                     <Link to={`/vehiculo/edit/${vehiculo.matricula}`} className='btn btn-primary'>
-                        <span class="material-symbols-outlined">editar</span>
+                        <span className="material-symbols-outlined">editar</span>
                     </Link>
 
                     {/* <button className='btn btn-danger' onClick={() => showModal(vehiculo.vehiculo_id)}>
@@ -82,7 +81,7 @@ export default function Vehiculos() {
             <div>
 
                 <Link to={`/vehiculo/crear/`} className='btn btn-primary'>
-                    <span class="material-symbols-outlined">Crear</span>
+                    <span className="material-symbols-outlined">Crear</span>
                 </Link>
 
             </div>
