@@ -2,7 +2,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
-import { Button, Modal } from 'react-bootstrap';
 
 
 export default function VehiculoEdit() {
@@ -38,25 +37,6 @@ export default function VehiculoEdit() {
         }
     )
     //----------------------------------------------------------------
-
-
-
-    // hooks dedicados a abrir el modal de eliminacion y setear el ID a eliminar
-    //----------------------------------------------------------------
-    const [modal, setModal] = useState(false);
-    const [matriculaToDelete, setMatriculaToDelete] = useState(null);
-    const showModal = (matricula) => {
-        setModal(true);
-        setMatriculaToDelete(matricula);
-    };
-
-    const closeModal = () => {
-        setModal(false);
-        setMatriculaToDelete(null);
-    };
-    //----------------------------------------------------------------
-
-
 
 
     // useEffect para cargar las marcas al montar el componente
@@ -167,10 +147,19 @@ export default function VehiculoEdit() {
     //----------------------------------------------------------------
 
 
+    // hooks dedicados a abrir el modal de eliminacion y setear el ID a eliminar
+    //----------------------------------------------------------------
+    const [showModal, setShowModal] = useState(false);
+    //----------------------------------------------------------------
+
+    const handleDelete = () => {
+        setShowModal(true);
+    };
+
     // funcion disparada al presionar el boton eiminar 
     //----------------------------------------------------------------
-    const handleClickDelete = async () => {
-        console.log(matriculaToDelete)
+    const confirmDelete = async () => {
+        setShowModal(false);
         const parametros = {
             method: 'DELETE',
             headers: {
@@ -180,19 +169,17 @@ export default function VehiculoEdit() {
             },
         };
 
-        const url = `http://localhost:8080/vehiculo/${matriculaToDelete}`;
+        const url = `http://localhost:8080/vehiculo/${matricula}`;
 
         try {
             const response = await fetch(url, parametros);
             const body = await response.json();
-
             if (response.ok) {
                 toast.success(body.message, configToast);
-                closeModal();
                 navigate('/vehiculos'); // Redirige después de eliminar
             }
         } catch (error) {
-            console.error(error);
+            toast.error(error.message, configToast);
         }
     };
 
@@ -289,7 +276,6 @@ export default function VehiculoEdit() {
                                 <div className='col d-flex justify-content-end gap-4'>
                                     <span className="btn btn-primary" type="submit"
                                         onClick={handleSubmit}>
-
                                         Guardar
                                     </span>
                                     <span className="btn btn-secondary"
@@ -299,10 +285,9 @@ export default function VehiculoEdit() {
                                         }}>
                                         Cancelar
                                     </span>
-                                    <span className='btn btn-danger ' onClick={() => showModal(vehiculo.matricula)}>
-                                        <span className="material-symbols-outlined">
-                                            Eliminar
-                                        </span>
+                                    <span className='btn btn-danger'
+                                        onClick={handleDelete}>
+                                        Eliminar
                                     </span>
                                 </div>
                             </div>
@@ -311,20 +296,26 @@ export default function VehiculoEdit() {
                 </div>
             </div>
 
-            <Modal show={modal} onHide={closeModal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Confirmación de Eliminación</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>¿Está seguro de eliminar el vehículo seleccionado?</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={closeModal}>
-                        Cancelar
-                    </Button>
-                    <Button variant="primary" onClick={handleClickDelete}>
-                        Confirmar Eliminación
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            <ConfirmModal
+                show={showModal}
+                onConfirm={confirmDelete}
+                onCancel={() => setShowModal(false)}
+            />
         </>
+    );
+}
+
+
+function ConfirmModal({ show, onConfirm, onCancel }) {
+    if (!show) return null;
+
+    return (
+        <div className="modal-overlay">
+            <div className="modal-content">
+                <h4>¿Estás seguro de que deseas eliminar este vehículo?</h4>
+                <button onClick={onConfirm} className="btn btn-info">Confirmar</button>
+                <button onClick={onCancel} className="btn btn-danger">Cancelar</button>
+            </div>
+        </div>
     );
 }
