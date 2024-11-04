@@ -29,7 +29,7 @@ export default function Login() {
 
     // aca en async "(datos)" tenemos lo que debemos mandar al backen, con la diferencia de que ya estan todos validados
     // ya se encuientran validados porque han superado las reglas de validacion puestos en cada submit al registrar ese input
-    const onSubmit = handleSubmit(async (datos) => {
+    const onSubmit = async (datos) => {
 
         const usuario = {
             mail: datos.mail,
@@ -62,15 +62,13 @@ export default function Login() {
             toast.error(error.message, confToast);
         }
 
-    })
-
-
+    }
 
     return (
         <section className='section_login'>
             <h3 className='titulo_login'>Ingresa a tu cuenta</h3>
             <form
-                onSubmit={onSubmit}
+                onSubmit={handleSubmit(onSubmit)}
                 className="container_login">
                 <div>
                     <label className='label_login'>Usuario o email</label>

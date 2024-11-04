@@ -7,17 +7,17 @@ import Login from "./pages/Login";
 import Menu from "./components/Menu";
 import NotFound from "./components/NotFound";
 import Componente from "./components/Componente";
-import HomeDoctores from "./pages/clinica/HomeDoctores";
-import Blog from "./pages/blog/Blog";
+import HomeDoctores from "./others/clinica/HomeDoctores";
+import Blog from "./others/blog/Blog";
 import VehiculoEdit from "./pages/VehiculoEdit";
 import VehiculosCard from "./pages/Vehiculos_card";
-import Reservas2 from "./pages/Reservas2";
+import ReservaEdit from "./pages/ReservaEdit";
+import Reservas from "./pages/Reservas";
 
 
 function App() {
     return (
         <>
-
             <BrowserRouter>
                 <div className="container">
                     <Menu />
@@ -35,7 +35,9 @@ function App() {
                         <Route path="/vehiculo/edit/:matricula" element={<VehiculoEdit />} />
 
 
-                        <Route path="/reservas" element={<Reservas2 />} />
+                        <Route path="/reservas" element={<Reservas />} />
+                        <Route path="/reservas/crear/" element={<ReservaEdit />} />
+                        <Route path="/reservas/edit/:matricula" element={<ReservaEdit />} />
                         <Route path="/blog" element={<Blog />} />
                         <Route path="/clinica" element={<HomeDoctores />} />
 

@@ -5,11 +5,10 @@ import { Button, Modal } from 'react-bootstrap';
 import editIcon from './../images/icos/edit.png';
 import cancelIcon from './../images/icos/cancel.png';
 import finishIcon from './../images/icos/finish.png';
-import addIcon from './../images/icos/add.png';
-import { Link } from 'react-router-dom';
+import ReservaEditModal from './ReservaEditModal';
 
 
-const Reservas = () => {
+const ReservasModal = () => {
     const [reservasFinalizadas, setReservasFinalizadas] = useState([]);
     const [reservasActivas, setReservasAtivas] = useState([]);
 
@@ -53,6 +52,18 @@ const Reservas = () => {
     }, []);
 
 
+
+    const handleShowModal = (reserva = null) => {
+        setReservaToEdit(reserva);
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setReservaToEdit(null);
+    };
+
+
     const handleFinalizar = async (reserva_id) => {
         try {
             await axios.put(`http://localhost:8080/reserva/finalizar/${reserva_id}`);
@@ -77,6 +88,12 @@ const Reservas = () => {
         }
     };
 
+    const handleSubmitSuccess = () => {
+        // Aquí puedes actualizar el listado de reservas después de crear o editar
+        console.log("Reserva creada/editada con éxito");
+        handleCloseModal();
+    };
+
     return (
         <>
 
@@ -89,10 +106,7 @@ const Reservas = () => {
                     </h2>
                     <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show">
                         <div className="accordion-body">
-                            <Button as={Link} to={`/reservas/crear/`} variant="outline-primary">
-                                <img src={addIcon} alt="Editar" className='px-2'/>
-                                Nueva Reserva
-                            </Button>
+                            <Button variant="primary" onClick={() => handleShowModal()}>Nueva Reserva</Button>
 
                             <table className="table table-striped">
                                 <thead>
@@ -118,14 +132,11 @@ const Reservas = () => {
                                                 <td>{new Date(reserva.hasta).toLocaleString()}</td>
                                                 <td>
 
-                                                    <Button as={Link} to={`/reservas/edit/${reserva.reserva_id}`} variant="primary">
+                                                    <Button variant="outline-primary"
+                                                        onClick={() => handleShowModal(reserva)}>
                                                         <img src={editIcon} alt="Editar" />
                                                         Editar
                                                     </Button>
-                                                    <Link to={`/reservas/edit/${reserva.reserva_id}`} className='btn btn-primary'>
-                                                        <img src={editIcon} alt="Editar" />
-                                                        <span className="material-symbols-outlined">Editar</span>
-                                                    </Link>
 
                                                     <Button variant="outline-danger" onClick={() => setIdToCancel(reserva.reserva_id)}>
                                                         <img src={cancelIcon} alt="Cancelar" />
@@ -141,6 +152,16 @@ const Reservas = () => {
                                     )}
                                 </tbody>
                             </table>
+
+                            {/* Renderiza el modal de ReservaEdit solo si showModal es true */}
+                            {showModal && (
+                                <ReservaEditModal
+                                    reserva={reservaToEdit}
+                                    show={showModal}
+                                    handleClose={handleCloseModal}
+                                    onSubmitSuccess={handleSubmitSuccess}
+                                />
+                            )}
                         </div>
                     </div>
                 </div>
@@ -201,16 +222,4 @@ const Reservas = () => {
     );
 };
 
-export default Reservas;
-
-
-
-
-const convertirFecha = (date) => {
-    const fecha = new Date(date);
-    const dia = fecha.getUTCDate().toString().padStart(2, '0');
-    const mes = (fecha.getUTCMonth() + 1).toString().padStart(2, '0');
-    const anio = fecha.getUTCFullYear();
-    return `${dia}/${mes}/${anio}`;
-};
-
+export default ReservasModal;

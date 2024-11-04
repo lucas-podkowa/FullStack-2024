@@ -73,7 +73,11 @@ export default function VehiculoEdit() {
 
     //----------------------------------------------------------------
 
-
+    /*
+                                <Link to={`/reservas/crear/`} className='btn btn-primary'>
+                                    <span className="material-symbols-outlined">Nueva Reserva</span>
+                                </Link>
+    */
 
     // useEffect para cargar los datos del vehículo si hay una matrícula
     //----------------------------------------------------------------
