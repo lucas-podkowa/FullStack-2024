@@ -46,8 +46,8 @@ const VehiculosCard = () => {
     }, []);
 
 
-    // const tokenDecoded = jwt_decode(sessionStorage.getItem('token'));
-    // const rol = tokenDecoded.rol;
+    //  const tokenDecoded = jwt_decode(sessionStorage.getItem('token'));
+    //  const rol = tokenDecoded.rol;
 
     return (
         <>
@@ -68,8 +68,8 @@ const VehiculosCard = () => {
                     </Card>
                 ))}
             </div>
-
-            {/* {rol === 'Administrador' && (
+            {/* 
+            {rol === 'Administrador' && (
                 <Link to={`/vehiculo/crear/`} className='btn btn-primary'>
                     <span className="material-symbols-outlined">Crear</span>
                 </Link>

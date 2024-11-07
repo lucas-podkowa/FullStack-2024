@@ -126,11 +126,23 @@ export default function VehiculoEdit() {
             : 'http://localhost:8080/vehiculo';
         const method = matricula ? 'PUT' : 'POST';
 
+        // Usamos FormData para manejar datos y archivos
+        const formData = new FormData()
+
+        // Agregar los datos del vehículo a FormData
+        Object.keys(vehiculo).forEach((key) => {
+            if (key === 'imagenes') {
+                // Si es la clave 'imagenes', agregamos cada archivo individualmente
+                vehiculo.imagenes.forEach((file) => formData.append('imagenes', file));
+            } else {
+                formData.append(key, vehiculo[key]);
+            }
+        });
+
         const parametros = {
             method: method,
-            body: JSON.stringify(vehiculo),
+            body: formData,
             headers: {
-                'Content-Type': 'application/json',
                 'Accept': 'application/json',
                 'authorization': sessionStorage.getItem('token')
             },
@@ -193,10 +205,10 @@ export default function VehiculoEdit() {
     // funcion que queda escuchando los campos en el formulario para setear
     // en la variable de estado vehiculo
     //----------------------------------------------------------------
-    const handleChange = (event) => {
+    const handleChange = (e) => {
         setVehiculo({
             ...vehiculo,
-            [event.target.name]: event.target.value,
+            [e.target.name]: e.target.value,
         });
     };
 
@@ -226,19 +238,6 @@ export default function VehiculoEdit() {
                                     </option>
                                 ))}
                             </select>
-                            <br />
-                            <div className="form-floating">
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    id="modelo"
-                                    placeholder="Modelo (ej: 2024)"
-                                    onChange={handleChange}
-                                    value={vehiculo.modelo}
-                                    name="modelo"
-                                />
-                                <label htmlFor="modelo">Modelo</label>
-                            </div>
                             <div className="form-floating">
                                 <input
                                     type="text"
@@ -251,6 +250,19 @@ export default function VehiculoEdit() {
                                 />
                                 <label htmlFor="nombre">Nombre</label>
                             </div>
+                            <div className="form-floating">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="modelo"
+                                    placeholder="Modelo (ej: 2024)"
+                                    onChange={handleChange}
+                                    value={vehiculo.modelo}
+                                    name="modelo"
+                                />
+                                <label htmlFor="modelo">Modelo / Año</label>
+                            </div>
+
                             <div className="form-floating">
                                 <input
                                     type="text"

@@ -45,7 +45,7 @@ export default function Login() {
             body: JSON.stringify(usuario)
         }
 
-        const url = "http://localhost:8080/security/login";
+        const url = "http://localhost:8080/usuario/login";
 
         try {
             const res = await fetch(url, parametros);

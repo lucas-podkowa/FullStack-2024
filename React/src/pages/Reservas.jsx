@@ -90,7 +90,7 @@ const Reservas = () => {
                     <div id="panelsStayOpen-collapseOne" className="accordion-collapse collapse show">
                         <div className="accordion-body">
                             <Button as={Link} to={`/reservas/crear/`} variant="outline-primary">
-                                <img src={addIcon} alt="Editar" className='px-2'/>
+                                <img src={addIcon} alt="Editar" className='px-2' />
                                 Nueva Reserva
                             </Button>
 
@@ -117,11 +117,13 @@ const Reservas = () => {
                                                 <td>{new Date(reserva.desde).toLocaleString()}</td>
                                                 <td>{new Date(reserva.hasta).toLocaleString()}</td>
                                                 <td>
+                                                    <div className="bottoms">
+                                                        <div className="bot bot1"><a href="#" title="Crear"><img src="/create.png" width="25" height="25" /></a></div>
+                                                        <div className="bot bot2"><a href="/alumnos/edit/" title="Modificar"><img src="/update.png" width="25" height="25" /></a></div>
+                                                        <div className="bot bot1"><a href="#" title="Eliminar"><img src="/delete.png" width="25" height="25" /></a></div>
+                                                    </div>
 
-                                                    <Button as={Link} to={`/reservas/edit/${reserva.reserva_id}`} variant="primary">
-                                                        <img src={editIcon} alt="Editar" />
-                                                        Editar
-                                                    </Button>
+
                                                     <Link to={`/reservas/edit/${reserva.reserva_id}`} className='btn btn-primary'>
                                                         <img src={editIcon} alt="Editar" />
                                                         <span className="material-symbols-outlined">Editar</span>
@@ -181,6 +183,7 @@ const Reservas = () => {
                         </div>
                     </div>
                 </div>
+
             </div>
 
 
